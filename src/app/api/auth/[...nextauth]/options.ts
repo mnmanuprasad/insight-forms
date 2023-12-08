@@ -1,22 +1,27 @@
-
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions:AuthOptions = { 
+export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
-  session:{
-    strategy: "jwt"
+  session: {
+    strategy: "jwt",
   },
   providers: [
     GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID as string,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-
-    })
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
   ],
-  pages:{
+  pages: {
     signIn: "/sign-in",
-    signOut: "/sign-out"
-  }
-}
-
+    signOut: "/sign-out",
+  },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      if (user) {
+        return true;
+      }
+      return '/unauthorized';
+    },
+  },
+};

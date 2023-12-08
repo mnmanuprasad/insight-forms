@@ -1,9 +1,11 @@
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export default async function SignIn(){
     const session = await getServerSession()
-   
-    return(
-        <h1>{session?.user?.name}</h1>
-    )
+    if(session?.user?.email){
+        // redirect("/me")
+    }
+ 
+    redirect("/")
 }
