@@ -1,8 +1,10 @@
-import { getServerSession } from "next-auth"
-import { Navbar } from "@/components/Navbar"
+import { Navbar } from "@/components/Navbar";
+import { Profile } from "@/components/Profile";
 
-export default async function Me(){
+export default async function Me() {
   return (
-    <Navbar />
-  )
+    <>
+      <Navbar />
+    </>
+  );
 }

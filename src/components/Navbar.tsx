@@ -2,6 +2,8 @@ import { getServerSession } from "next-auth";
 import { sono } from "@/lib/fonts";
 import { LibraryBig } from "lucide-react";
 import Image from "next/image";
+import { Profile } from "./Profile";
+import { useState } from "react";
 
 export async function Navbar() {
   const session = await getServerSession();
@@ -20,6 +22,9 @@ export async function Navbar() {
             alt="Profile Image"
             className="rounded-full cursor-pointer lg:mr-2"
         />
+      </div>
+      <div className="absolute top-11 right-1">
+        <Profile />
       </div>
     </div>
   );
