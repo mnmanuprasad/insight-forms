@@ -1,13 +1,18 @@
-import { getServerSession } from "next-auth";
+"use client"
+import { useSession } from "next-auth/react";
 import { sono } from "@/lib/fonts";
 import { LibraryBig } from "lucide-react";
 import Image from "next/image";
 import { Profile } from "./Profile";
 import { useState } from "react";
+import clsx from "clsx";
 
-export async function Navbar() {
-  const session = await getServerSession();
+export  function Navbar() {
+  const {data: session} = useSession()
   const img = session?.user?.image || "";
+
+  const [profileView, setProfileView] = useState(false)
+
   return (
     <div className="flex flex-col justify-center border-b-2 border-solid pb-1">
       <div className="flex items-center  mt-4 justify-between mx-2 ">
@@ -21,9 +26,13 @@ export async function Navbar() {
             width={30}
             alt="Profile Image"
             className="rounded-full cursor-pointer lg:mr-2"
+            onClick={()=>setProfileView(!profileView)}
         />
       </div>
-      <div className="absolute top-11 right-1">
+      <div className={clsx("absolute top-12 right-3", {
+        "hidden": profileView == false,
+        "block": profileView == true
+      })}>
         <Profile />
       </div>
     </div>

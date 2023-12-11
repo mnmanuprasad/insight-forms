@@ -1,8 +1,10 @@
+"use client"
 import Image from "next/image";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
-export async function Profile() {
-  const session = await getServerSession();
+export  function Profile() {
+  const {data: session} =  useSession();
   const img = session?.user?.image || "";
 
   return (
@@ -20,7 +22,11 @@ export async function Profile() {
           <p className="text-slate-400">{session?.user?.email}</p>
         </div>
       </div>
-      <p className="p-2 text-rose-800 hover:bg-slate-200 cursor-pointer">Log out</p>
+      <p className="p-2 text-rose-800 hover:bg-slate-200 cursor-pointer"
+        onClick={()=>signOut()}
+      >
+        Sign out
+      </p>
     </div>
   );
 }
