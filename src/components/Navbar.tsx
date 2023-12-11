@@ -29,7 +29,7 @@ export  function Navbar() {
             onClick={()=>setProfileView(!profileView)}
         />
       </div>
-      <div className={clsx("absolute top-12 right-3", {
+      <div className={clsx("absolute top-14 right-3", {
         "hidden": profileView == false,
         "block": profileView == true
       })}>

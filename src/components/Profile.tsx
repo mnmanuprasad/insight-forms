@@ -8,7 +8,7 @@ export  function Profile() {
   const img = session?.user?.image || "";
 
   return (
-    <div className="flex flex-col w-fit  shadow-xl rounded-md text-xs">
+    <div className="flex flex-col w-fit  shadow-xl rounded-md text-xs bg-white">
       <div className="flex gap-2 p-2 py-4 border-b-2 border-solid border-slate-200">
         <Image
           src={img}

@@ -4,7 +4,6 @@ import { sono } from "../lib/fonts";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export  function Landing(){
@@ -51,8 +50,12 @@ export  function Landing(){
             </p>
           </div>
     
-          <Button className="w-fit mt-12 place-self-center">
-              <Link href={"/me"}> Get started, Its free</Link>
+          <Button 
+          onClick={() =>
+            signIn("google", { callbackUrl: "/sign-in", redirect: true })
+          }
+          className="w-fit mt-12 place-self-center">
+              Get started, Its free
           </Button>
     
           <Image
