@@ -11,7 +11,7 @@ export default async function Me() {
   return (
     <div>
       <Navbar />
-      <div className="bg-slate-100 h-[94vh] overflow-y-hidden flex flex-col justify-around">
+      <div className="bg-slate-100 h-[94vh] flex flex-col justify-around items-center">
       <CreateFormDialog />
       </div>
     </div>
