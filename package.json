@@ -2,13 +2,12 @@
   "name": "insight-froms",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "push": "node migrate.js",
+    "push": "node --experimental-modules migrate.mjs ",
     "generate": "drizzle-kit generate:pg"
   },
   "dependencies": {
