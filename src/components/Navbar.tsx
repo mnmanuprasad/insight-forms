@@ -10,7 +10,6 @@ import clsx from "clsx";
 export  function Navbar() {
   const {data: session} = useSession()
   const img = session?.user?.image || "";
-
   const [profileView, setProfileView] = useState(false)
 
   return (
