@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AuthProvider from "./context/AuthProvider";
-import { Toaster } from "@/components/ui/toaster";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import { inter } from "@/lib/fonts";
 
@@ -19,7 +19,18 @@ export default function RootLayout({
       <AuthProvider>
         <body className={`${inter.className} min-w-[320px]`}>
           {children}
-          <Toaster />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </body>
       </AuthProvider>
     </html>

@@ -16,7 +16,7 @@ import { Textarea } from "./ui/textarea";
 import { useFormState } from "react-dom";
 import { createForm } from "@/app/actions/createForm";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { useToast } from "./ui/use-toast";
+import { toast } from "react-toastify";
 
 const initialState = {
   message: "",
@@ -24,26 +24,37 @@ const initialState = {
 };
 
 export function CreateFormDialog() {
-  const {toast} = useToast()
+  
   const [state, formAction] = useFormState(createForm, initialState);
   const [dialogState, setDialogState] = useState(false);
 
   useEffect(()=>{
     if(state.message){
       if(state.status == "failed"){
-        toast({
-          description: state.message,
-          variant: "destructive",
-          duration: 2000
-        })
+        toast.error(state.message, {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }else{
-        toast({
-          description: state.message,
-          duration: 2000
-        })
+        toast.success(state.message, {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
     }
-  },[state, toast])
+  },[state])
 
   function addNewForm(event: SyntheticEvent) {
     console.log(event);
@@ -75,8 +86,6 @@ export function CreateFormDialog() {
             name="formName"
             id="name"
             className="col-span-3"
-            // required
-            // minLength={4}
           />
           <Textarea
             name="description"
