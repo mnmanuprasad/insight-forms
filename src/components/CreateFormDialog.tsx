@@ -24,13 +24,13 @@ const initialState = {
 };
 
 export function CreateFormDialog() {
-  
   const [state, formAction] = useFormState(createForm, initialState);
   const [dialogState, setDialogState] = useState(false);
 
-  useEffect(()=>{
-    if(state.message){
-      if(state.status == "failed"){
+
+  useEffect(() => {
+    if (state.message) {
+      if (state.status == "failed") {
         toast.error(state.message, {
           position: "bottom-right",
           autoClose: 2000,
@@ -40,8 +40,8 @@ export function CreateFormDialog() {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
-      }else{
+        });
+      } else {
         toast.success(state.message, {
           position: "bottom-right",
           autoClose: 2000,
@@ -51,10 +51,15 @@ export function CreateFormDialog() {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
       }
     }
-  },[state])
+  }, [state]);
+
+
+  function updateDialogState(state: boolean){
+      setDialogState(state)
+  }
 
   function addNewForm(event: SyntheticEvent) {
     console.log(event);
@@ -68,7 +73,7 @@ export function CreateFormDialog() {
       >
         <CreateForm />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" updatDialogState={updateDialogState}>
         <DialogHeader>
           <DialogTitle>Create A New Form</DialogTitle>
           <DialogDescription>Fill the form details</DialogDescription>
