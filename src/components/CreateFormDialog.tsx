@@ -16,7 +16,7 @@ import { Textarea } from "./ui/textarea";
 import { useFormState } from "react-dom";
 import { createForm } from "@/app/actions/createForm";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import toast from 'react-hot-toast'
 
 const initialState = {
   message: "",
@@ -31,27 +31,9 @@ export function CreateFormDialog() {
   useEffect(() => {
     if (state.message) {
       if (state.status == "failed") {
-        toast.error(state.message, {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.error(state.message as string);
       } else {
-        toast.success(state.message, {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.success(state.message as string);
       }
     }
   }, [state]);

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import AuthProvider from "./context/AuthProvider";
-import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import { inter } from "@/lib/fonts";
+import  { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: "Insight Forms",
@@ -19,18 +19,7 @@ export default function RootLayout({
       <AuthProvider>
         <body className={`${inter.className} min-w-[320px]`}>
           {children}
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
+          <Toaster  position="bottom-right"/>
         </body>
       </AuthProvider>
     </html>
