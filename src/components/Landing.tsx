@@ -15,7 +15,7 @@ export  function Landing(){
     }
 
     return (
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center ">
           <div className="flex items-center  mt-4 justify-between mx-2">
             <div className="flex gap-2 font-semibold items-center">
               <LibraryBig size={34} strokeWidth={1.2} />
