@@ -33,10 +33,12 @@ export async function createForm(prevState: any, formData: FormData) {
     }
     const { data } = validatedFields;
 
+    // @ts-ignore
     if (!session.user.userId) {
       return { message: "Something went wrong", status: "failed" };
     }
     await db.insert(forms).values({
+      // @ts-ignore
       userId: session.user.userId,
       formName: data.formName,
       description: data.description,
