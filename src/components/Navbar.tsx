@@ -14,8 +14,8 @@ export  function Navbar() {
   const [profileView, setProfileView] = useState(false)
 
   return (
-    <div className="flex flex-col justify-center border-b-2 border-solid pb-1">
-      <div className="flex items-center  mt-4 justify-between mx-2 ">
+    <div className="flex bg-white flex-col justify-center border-b-2 border-solid pb-1">
+      <div className="flex items-center  mt-2 justify-between mx-2 ">
         <Link href={"/"}>
         <div className="flex gap-2 cursor-pointer font-semibold items-center">
           <LibraryBig size={34} strokeWidth={1.2} />
