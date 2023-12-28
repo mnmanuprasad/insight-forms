@@ -2,11 +2,11 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
-export  function Profile() {
-  const {data: session} =  useSession();
+export function Profile() {
+  const { data: session } = useSession();
   const img = session?.user?.image || "";
-
   return (
     <div className="flex flex-col w-fit  shadow-xl rounded-md text-xs bg-white">
       <div className="flex gap-2 p-2 py-4 border-b-2 border-solid border-slate-200">
@@ -22,11 +22,17 @@ export  function Profile() {
           <p className="text-slate-400">{session?.user?.email}</p>
         </div>
       </div>
-      <p className="p-2 text-rose-800 hover:bg-slate-200 cursor-pointer"
-        onClick={()=>signOut()}
-      >
-        Sign out
-      </p>
+      <div>
+        <Link href={"/me/forms"}>    <p className="p-2 font-medium hover:bg-slate-200 cursor-pointer border-b-2 border-dashed border-slate-200">Forms</p></Link>
+      </div>
+      <div>
+        <p
+          className="p-2 text-rose-800 hover:bg-slate-200 cursor-pointer"
+          onClick={() => signOut()}
+        >
+          Sign out
+        </p>
+      </div>
     </div>
   );
 }

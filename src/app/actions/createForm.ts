@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { forms } from "@/lib/db/schema";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
+import { revalidatePath } from "next/cache";
 
 export async function createForm(prevState: any, formData: FormData) {
   try {
@@ -33,18 +34,17 @@ export async function createForm(prevState: any, formData: FormData) {
     }
     const { data } = validatedFields;
 
-    // @ts-ignore
     if (!session.user.userId) {
       return { message: "Something went wrong", status: "failed" };
     }
     await db.insert(forms).values({
-      // @ts-ignore
       userId: session.user.userId,
       formName: data.formName,
       description: data.description,
     });
-
+    revalidatePath("/me")
     return { message: "New Form Created", status: "success" };
+
   } catch (error) {
     return { message: "Something went wrong", status: "failed" };
   }

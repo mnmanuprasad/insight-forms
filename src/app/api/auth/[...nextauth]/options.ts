@@ -55,7 +55,6 @@ export const authOptions: AuthOptions = {
     },
     async session({session, token}){
       if(session.user){
-        // @ts-ignore
         session.user.userId = token.userId
       }
       return session

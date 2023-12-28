@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { CreateFormDialog } from "@/components/CreateFormDialog";
+import { FormListing } from "@/components/FormListing";
 
 export default async function Me() {
   const session = await getServerSession();
@@ -12,6 +13,7 @@ export default async function Me() {
     <div>
       <Navbar />
       <div className="bg-slate-100 h-[94vh] flex flex-col justify-around items-center">
+      <FormListing />
       <CreateFormDialog />
       </div>
     </div>

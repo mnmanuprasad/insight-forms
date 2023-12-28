@@ -16,3 +16,6 @@ export const forms = schema.table("forms",{
     description: text('description'),
     createdAt: timestamp('created_at').notNull().default(sql`now()`),
 })
+
+export type formsType = typeof forms;
+
