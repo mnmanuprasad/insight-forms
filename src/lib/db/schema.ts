@@ -1,4 +1,5 @@
-import { integer, pgSchema, serial, text } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { integer, timestamp, pgSchema, serial, text } from "drizzle-orm/pg-core";
 
 export const schema = pgSchema("insightForms");
 
@@ -12,5 +13,6 @@ export const forms = schema.table("forms",{
     id: serial("id").primaryKey(),
     userId: integer("user_id").references(()=>users.id),
     formName: text('form_name').notNull(),
-    description: text('description')
+    description: text('description'),
+    createdAt: timestamp('created_at').notNull().default(sql`now()`),
 })
