@@ -1,6 +1,3 @@
-import { getUserForms } from "@/lib/db/helpers";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import {
   Card,
   CardHeader,
@@ -10,12 +7,9 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 
-export async function FormListing() {
-  const session = await getServerSession(authOptions);
-  const userId = session?.user.userId;
-  const userForms = await getUserForms(userId);
+export async function FormListing({ userForms }: { userForms: any[] }) {
   return (
-    <div className="hidden md:grid md:grid-cols-3 2xl:grid-cols-6  gap-2  justify-items-center">
+    <div className="grid grid-cols-1  sm:grid-cols-2  md:grid-cols-3 2xl:grid-cols-6  gap-2  justify-items-center">
       {userForms.map((forms) => {
         return (
           <Card key={forms.id} className="w-[27ch]">

@@ -8,13 +8,14 @@ import { useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 
+
 export  function Navbar() {
   const {data: session} = useSession()
   const img = session?.user?.image || "";
   const [profileView, setProfileView] = useState(false)
 
   return (
-    <div className="flex bg-white flex-col justify-center border-b-2 border-solid pb-1">
+    <div className="flex sticky top-0 bg-white flex-col justify-center border-b-2 border-solid pb-1">
       <div className="flex items-center  mt-2 justify-between mx-2 ">
         <Link href={"/"}>
         <div className="flex gap-2 cursor-pointer font-semibold items-center">
@@ -22,14 +23,20 @@ export  function Navbar() {
           <h2 className={`${sono.className} text-2xl`}>Insight Forms</h2>
         </div>
         </Link>
-        <Image 
+       <div>
+       <Image 
+            tabIndex={0}
             src={img}
             height={30}
             width={30}
             alt="Profile Image"
             className="rounded-full cursor-pointer lg:mr-2"
             onClick={()=>setProfileView(!profileView)}
+            // onBlur={(e)=>{
+            //   setProfileView(!profileView)
+            // }}
         />
+       </div>
       </div>
       <div className={clsx("absolute top-14 right-3", {
         "hidden": profileView == false,
