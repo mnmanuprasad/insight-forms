@@ -43,10 +43,6 @@ export function CreateFormDialog() {
       setDialogState(state)
   }
 
-  function addNewForm(event: SyntheticEvent) {
-    console.log(event);
-  }
-
   return (
     <Dialog open={dialogState}>
       <DialogTrigger
@@ -62,7 +58,6 @@ export function CreateFormDialog() {
         </DialogHeader>
         <form
           onSubmit={(event) => {
-            addNewForm(event);
             setDialogState(false);
           }}
           action={formAction}

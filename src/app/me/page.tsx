@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { CreateFormDialog } from "@/components/CreateFormDialog";
@@ -13,10 +12,10 @@ export default async function Me() {
   }
   const userId = session?.user.userId;
   const userForms = await getLatestUserForms(userId);
-  console.log(userForms);
+
   return (
     <div>
-      <div className="bg-slate-100 h-[94vh] flex flex-col justify-around gap-2 items-center">
+      <div className="h-[94vh] flex flex-col justify-around gap-2 items-center">
         <div className="hidden md:block">
           <FormListing userForms={userForms} />
         </div>
