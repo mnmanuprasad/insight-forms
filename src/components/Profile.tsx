@@ -9,6 +9,7 @@ export function Profile({ setProfileView }: {setProfileView: (value: boolean) =>
   const img = session?.user?.image || "";
   return (
     <div
+    style={{zIndex: "9999"}}
       tabIndex={0}
       onBlur={() => {
         setProfileView(false);

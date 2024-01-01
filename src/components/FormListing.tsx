@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardHeader,
@@ -7,8 +8,17 @@ import {
 } from "./ui/card";
 import { Trash2, Eye, FileEdit } from "lucide-react";
 import { TooltipWrapper } from "./TooltipWrapper";
+import { deleteForm } from "@/lib/queries/deleteForm";
+import { useMutation } from "@tanstack/react-query";
 
-export async function FormListing({ userForms }: { userForms: any[] }) {
+export  function FormListing({ userForms }: { userForms: any[] }) {
+  const mutation = useMutation({
+    mutationFn: (formId: string) => {
+      return deleteForm({ formId });
+    },
+    mutationKey: ["deleteForm"],
+  });
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 2xl:grid-cols-6  gap-2  justify-items-center">
       {userForms.map((forms) => {
@@ -30,7 +40,12 @@ export async function FormListing({ userForms }: { userForms: any[] }) {
                   <FileEdit className="cursor-pointer text-indigo-600 hover:text-indigo-500" />
                 </TooltipWrapper>
                 <TooltipWrapper toolTipText="Delete Form">
-                  <Trash2 className="cursor-pointer text-red-600 hover:text-red-500" />
+                  <Trash2
+                    onClick={() => {
+                      mutation.mutate(forms.id);
+                    }}
+                    className="cursor-pointer text-red-600 hover:text-red-500"
+                  />
                 </TooltipWrapper>
               </div>
             </CardFooter>
