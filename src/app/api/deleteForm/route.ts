@@ -4,7 +4,8 @@ import { z } from "zod";
 import { forms } from "@/lib/db/schema";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
-import { and, eq  } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 export async function DELETE(request: Request) {
   const session = await getServerSession(authOptions);
@@ -15,7 +16,7 @@ export async function DELETE(request: Request) {
 
   const userId = session.user.userId;
 
-  const payloadData =  await request.json()
+  const payloadData = await request.json();
 
   const formId = payloadData.formId;
 
@@ -32,14 +33,24 @@ export async function DELETE(request: Request) {
   //   );
   // }
 
-  const response = db
+  const response = await db
     .delete(forms)
-    .where(
-      and(
-        eq(forms.userId, userId),
-        eq(forms.id, formId)
-      )
-    );
+    .where(and(eq(forms.userId, userId), eq(forms.id, formId)));
 
-  return NextResponse.json({message: "success", status: "success"});
+  revalidatePath("/me/forms")
+
+   revalidatePath("/me");
+
+  if (response.rowCount > 0) {
+    return NextResponse.json(
+      { message: "Form Delete Successfully", status: "success" },
+      { status: 200 }
+    );
+  }
+  return NextResponse.json(
+    { message: "Form not found", status: "error" },
+    { status: 400 }
+  );
 }
+
+

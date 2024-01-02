@@ -2,6 +2,7 @@
 import { Navbar } from "@/components/Navbar";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 const queryClient = new QueryClient();
+import { Toaster } from "react-hot-toast";
 
 export default function MeLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ export default function MeLayout({ children }: { children: React.ReactNode }) {
       <div className="bg-slate-100 h-full">
         <Navbar />
         {children}
+        {/* <Toaster position="bottom-right" /> */}
       </div>
     </QueryClientProvider>
   );

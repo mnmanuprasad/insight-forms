@@ -42,7 +42,9 @@ export async function createForm(prevState: any, formData: FormData) {
       formName: data.formName,
       description: data.description,
     });
+
     revalidatePath("/me")
+    
     return { message: "New Form Created", status: "success" };
 
   } catch (error) {

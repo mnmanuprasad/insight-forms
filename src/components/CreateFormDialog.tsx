@@ -15,8 +15,8 @@ import { CreateForm } from "./CreateForm";
 import { Textarea } from "./ui/textarea";
 import { useFormState } from "react-dom";
 import { createForm } from "@/app/actions/createForm";
-import { SyntheticEvent, useEffect, useState } from "react";
-import toast from 'react-hot-toast'
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const initialState = {
   message: "",
@@ -26,7 +26,6 @@ const initialState = {
 export function CreateFormDialog() {
   const [state, formAction] = useFormState(createForm, initialState);
   const [dialogState, setDialogState] = useState(false);
-
 
   useEffect(() => {
     if (state.message) {
@@ -38,9 +37,8 @@ export function CreateFormDialog() {
     }
   }, [state]);
 
-
-  function updateDialogState(state: boolean){
-      setDialogState(state)
+  function updateDialogState(state: boolean) {
+    setDialogState(state);
   }
 
   return (
@@ -51,7 +49,10 @@ export function CreateFormDialog() {
       >
         <CreateForm />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]" updatDialogState={updateDialogState}>
+      <DialogContent
+        className="sm:max-w-[425px]"
+        updatDialogState={updateDialogState}
+      >
         <DialogHeader>
           <DialogTitle>Create A New Form</DialogTitle>
           <DialogDescription>Fill the form details</DialogDescription>
